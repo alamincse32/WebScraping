@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -q default
+#PBS -N Web_Data_Scrapping_1_10
+## serial jobs: ONLY 1 processor core is requested
+#PBS -l select=1:mem=8gb:ncpus=4
+#PBS -l walltime=168:00:00
+#PBS -j oe
+## replace "x-ccast-prj-" below with "x-ccast-prj-[your project group name]"
+#PBS -W group_list=x-ccast-prj-ssalem
+
+## load Python: python/3.8.6-intel-uly7 or python/3.8.6-gcc-2pmf 
+module load python/3.9-intel-uly7
+
+##module load python
+source /mmfs1/home/md.al.1/anaconda3/bin/activate
+conda init
+conda activate base
+
+
+cd $PBS_O_WORKDIR
+
+## change the input filename if neededw
+python3  WebScrappingAllLink.py
+
+exit 0
